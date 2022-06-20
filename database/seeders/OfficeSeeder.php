@@ -14,6 +14,7 @@ class OfficeSeeder extends Seeder
      */
     public function run()
     {
+        // 1 to 10
         Office::create([
             'office_name' => 'Office A',
             'image' => 'https://images.adsttc.com/media/images/6201/6b87/44ba/f701/6424/bce1/large_jpg/pir-exterior-kyrre-sundal-13.jpg?1644260270',
