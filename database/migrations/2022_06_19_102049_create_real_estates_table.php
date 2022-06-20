@@ -15,6 +15,12 @@ class CreateRealEstatesTable extends Migration
     {
         Schema::create('real_estates', function (Blueprint $table) {
             $table->id();
+            $table->string('location');
+            $table->string('type');
+            $table->string('sales_type');
+            $table->integer('price');
+            $table->string('image');
+            $table->string('status');
             $table->timestamps();
         });
     }
