@@ -17,6 +17,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-// tesss
-// tes lagi
-// lagi lagi
+
