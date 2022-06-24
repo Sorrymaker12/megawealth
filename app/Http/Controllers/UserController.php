@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -52,7 +52,7 @@ class UserController extends Controller
 
             //5 itu 5 menit cookie akan berlaku
 
-            return redirect('home_page');
+            return redirect()->route('home_page');
         } else {
             return redirect()->back()->withErrors(['creds' => 'Invalid Account']);
         }
