@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         // call office and real estate seeders
         $this->call(OfficeSeeder::class);
         $this->call(RealEstateSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

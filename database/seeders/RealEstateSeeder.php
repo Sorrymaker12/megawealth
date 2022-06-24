@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\RealEstate;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class RealEstateSeeder extends Seeder
@@ -17,6 +18,7 @@ class RealEstateSeeder extends Seeder
         // create real estates
         // 1 to 10
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'Milan',
             'type' => 'House',
             'sales_type' => 'Rent',
@@ -25,6 +27,7 @@ class RealEstateSeeder extends Seeder
             'status' => 'Available',
         ]);
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'Paris',
             'type' => 'House',
             'sales_type' => 'Rent',
@@ -33,6 +36,7 @@ class RealEstateSeeder extends Seeder
             'status' => 'Available',
         ]);
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'London',
             'type' => 'House',
             'sales_type' => 'Rent',
@@ -41,6 +45,7 @@ class RealEstateSeeder extends Seeder
             'status' => 'Available',
         ]);
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'Monaco',
             'type' => 'House',
             'sales_type' => 'Rent',
@@ -49,6 +54,7 @@ class RealEstateSeeder extends Seeder
             'status' => 'Available',
         ]);
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'Doha',
             'type' => 'House',
             'sales_type' => 'Rent',
@@ -57,6 +63,7 @@ class RealEstateSeeder extends Seeder
             'status' => 'Available',
         ]);
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'Abu Dhabi',
             'type' => 'House',
             'sales_type' => 'Buy',
@@ -65,6 +72,7 @@ class RealEstateSeeder extends Seeder
             'status' => 'Available',
         ]);
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'Phoenix',
             'type' => 'House',
             'sales_type' => 'Buy',
@@ -73,6 +81,7 @@ class RealEstateSeeder extends Seeder
             'status' => 'Available',
         ]);
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'Los Angeles',
             'type' => 'House',
             'sales_type' => 'Buy',
@@ -81,6 +90,7 @@ class RealEstateSeeder extends Seeder
             'status' => 'Available',
         ]);
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'Las Vegas',
             'type' => 'House',
             'sales_type' => 'Buy',
@@ -89,6 +99,7 @@ class RealEstateSeeder extends Seeder
             'status' => 'Available',
         ]);
         RealEstate::create([
+            'id' => Str::uuid(),
             'location' => 'Dallas',
             'type' => 'House',
             'sales_type' => 'Buy',
