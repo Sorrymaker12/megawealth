@@ -15,7 +15,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return redirect()->route('home_page');
 });
 
 Route::group(['prefix' => 'auth'], function () {
