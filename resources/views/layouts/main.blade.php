@@ -24,12 +24,53 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/home">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth/register">Register</a>
-                    </li>
+
+                    @if (Gate::allows('isAdmin'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Manage Company</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Manage Real Estates</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/logout">Logout</a>
+                        </li>
+                    @endif
+
+                    @if (Gate::allows('isMember'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Buy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Rent</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/logout">Logout</a>
+                        </li>
+                    @endif
+
+                    @if (!Gate::allows('isMember') && !Gate::allows('isAdmin'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Buy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Rent</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Register</a>
+                        </li>
+                    @endif
+
+
                 </ul>
             </div>
         </div>

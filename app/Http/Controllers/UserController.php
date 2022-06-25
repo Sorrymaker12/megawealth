@@ -52,6 +52,12 @@ class UserController extends Controller
 
             //5 itu 5 menit cookie akan berlaku
 
+            // return view('home', [
+            //     'name' => $request->name,
+            //     'email' => $request->email,
+            //     'password' => $request->password
+            // ]);
+
             return redirect()->route('home_page');
         } else {
             return redirect()->back()->withErrors(['creds' => 'Invalid Account']);
