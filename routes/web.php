@@ -36,7 +36,7 @@ Route::group(['prefix' => 'view'], function () {
     Route::get('result', [UserController::class, 'index_result'])->name('result_page');
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('managecompany', [UserController::class, 'index_managecompany'])->name('managecompany_page');
     Route::get('addoffice', [UserController::class, 'index_addoffice'])->name('addoffice_page');
     Route::get('updateoffice', [UserController::class, 'index_updateoffice'])->name('updateoffice_page');
