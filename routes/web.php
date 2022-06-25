@@ -15,7 +15,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    // return redirect()->route('home_page');
+    return redirect()->route('home_page');
 });
 
 Route::group(['prefix' => 'auth'], function () {
@@ -26,4 +26,21 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
 });
 
-Route::get('/home', [UserController::class, 'index_home'])->name('home_page');
+
+Route::group(['prefix' => 'view'], function () {
+    Route::get('home', [UserController::class, 'index_home'])->name('home_page');
+    Route::get('about', [UserController::class, 'index_about'])->name('about_page');
+    Route::get('buy', [UserController::class, 'index_buy'])->name('buy_page');
+    Route::get('rent', [UserController::class, 'index_rent'])->name('rent_page');
+    Route::get('cart', [UserController::class, 'index_cart'])->name('cart_page');
+    Route::get('result', [UserController::class, 'index_result'])->name('result_page');
+});
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('managecompany', [UserController::class, 'index_managecompany'])->name('managecompany_page');
+    Route::get('addoffice', [UserController::class, 'index_addoffice'])->name('addoffice_page');
+    Route::get('updateoffice', [UserController::class, 'index_updateoffice'])->name('updateoffice_page');
+    Route::get('managerealestate', [UserController::class, 'index_managerealestate'])->name('managerealestate_page');
+    Route::get('addrealestate', [UserController::class, 'index_addrealestate'])->name('addrealestate_page');
+    Route::get('updaterealstate', [UserController::class, 'index_updaterealestate'])->name('updaterealestate_page');
+});

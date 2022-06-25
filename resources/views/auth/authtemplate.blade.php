@@ -11,10 +11,9 @@
 
 <body>
     {{-- NavBar --}}
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">megAWealth</a>
+            <a class="navbar-brand" href="/view/home">megAWealth</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: flex-end">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Home</a>
+                        <a class="nav-link" href="/view/home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/auth/login">Login</a>
