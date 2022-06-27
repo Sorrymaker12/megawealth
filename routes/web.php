@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OfficeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'view'], function () {
     Route::get('home', [UserController::class, 'index_home'])->name('home_page');
-    Route::get('about', [UserController::class, 'index_about'])->name('about_page');
+    Route::get('about', [OfficeController::class, 'index_about'])->name('about_page');
     Route::get('buy', [UserController::class, 'index_buy'])->name('buy_page');
     Route::get('rent', [UserController::class, 'index_rent'])->name('rent_page');
     Route::get('cart', [UserController::class, 'index_cart'])->name('cart_page');
