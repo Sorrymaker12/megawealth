@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RealEstate;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -82,12 +83,16 @@ class UserController extends Controller
 
     public function index_buy()
     {
-        return view('view.buy');
+        return view('view.buy', [
+            'RealEstates' => RealEstate::where([['status', '=', 'available'], ['sales_type', '=', 'Buy']])->paginate(4)
+        ]);
     }
 
     public function index_rent()
     {
-        return view('view.rent');
+        return view('view.rent', [
+            'RealEstates' => RealEstate::where([['status', '=', 'available'], ['sales_type', '=', 'Rent']])->paginate(4)
+        ]);
     }
 
     public function index_cart()
