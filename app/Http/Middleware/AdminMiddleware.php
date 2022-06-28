@@ -22,7 +22,7 @@ class AdminMiddleware
                 return abort(403);
             }
         } else {
-            return redirect()->route('login_page');
+            return abort(403);
         }
         return $next($request);
     }

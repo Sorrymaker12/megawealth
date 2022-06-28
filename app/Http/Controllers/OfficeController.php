@@ -9,8 +9,25 @@ use Illuminate\Pagination\Paginator;
 
 class OfficeController extends Controller
 {
-    public function index_about(){
+    public function index_about()
+    {
         $offices = Office::paginate(5);
         return view('view.about', compact('offices'));
+    }
+
+    public function index_managecompany()
+    {
+        $Offices = Office::paginate(4);
+        return view('admin.managecompany', compact('Offices'));
+    }
+
+    public function index_addoffice()
+    {
+        return view('admin.addoffice');
+    }
+
+    public function index_updateoffice()
+    {
+        return view('admin.updateoffice');
     }
 }
