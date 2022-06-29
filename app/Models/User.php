@@ -11,4 +11,11 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
 }
