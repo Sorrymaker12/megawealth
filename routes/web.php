@@ -31,11 +31,11 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'view'], function () {
     Route::get('home', [UserController::class, 'index_home'])->name('home_page');
-    Route::get('about', [OfficeController::class, 'index_about'])->name('about_page');
-    Route::get('buy', [RealEstateController::class, 'index_buy'])->name('buy_page');
-    Route::get('rent', [RealEstateController::class, 'index_rent'])->name('rent_page');
-    Route::get('cart', [RealEstateController::class, 'index_cart'])->name('cart_page');
-    Route::get('result', [RealEstateController::class, 'index_result'])->name('result_page');
+    Route::get('about', [OfficeController::class, 'index_about'])->name('about_page')->middleware('user');
+    Route::get('buy', [RealEstateController::class, 'index_buy'])->name('buy_page')->middleware('user');
+    Route::get('rent', [RealEstateController::class, 'index_rent'])->name('rent_page')->middleware('user');
+    Route::get('cart', [RealEstateController::class, 'index_cart'])->name('cart_page')->middleware('user');
+    Route::get('result', [RealEstateController::class, 'index_result'])->name('result_page')->middleware('user');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {

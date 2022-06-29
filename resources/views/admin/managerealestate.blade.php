@@ -17,16 +17,34 @@
             <div class="d-flex justify-content-center">
                 @foreach ($RealEstates as $RealEstate)
                     {{-- Real Estate Card --}}
-                    <div class="card mx-4" style="width: 24rem; height: 36rem;">
+                    <div class="card mx-4" style="width: 24rem; height: 32rem;">
                         <img src="{{ $RealEstate->image }}" class="card-img-top" alt="..."
                             style="height: 20rem; width: 24rem;">
                         <div class="card-body">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text"></p>
-                            <p class="card-text"></p>
+                            <h5 class="card-title"> $ {{ $RealEstate->price }} @if ($RealEstate->sales_type === 'Rent')
+                                    / Month
+                                @endif
+                            </h5>
+                            <p class="card-text"> {{ $RealEstate->location }}</p>
+                            <div class="d-flex flex-row mb-3">
+                                <button type="button" class="btn btn-info btn-sm me-2">{{ $RealEstate->type }}</button>
+                                @if ($RealEstate->status === 'Available')
+                                    <button type="button"
+                                        class="btn btn-primary btn-sm mx-2">{{ $RealEstate->sales_type }}
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-sm mx-2">{{ $RealEstate->status }}
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-success btn-sm mx-2">Transaction
+                                        Completed</button>
+                                @endif
+                            </div>
                             <div class="d-flex justify-content-center">
                                 <a href="/admin/updaterealestate" class="btn btn-primary mx-4">Update</a>
                                 <a href="#" class="btn btn-danger mx-4">Delete</a>
+                                @if ($RealEstate->status === 'Cart')
+                                    <a href="#" class="btn btn-success mx-4">Finish</a>
+                                @endif
                             </div>
                         </div>
                     </div>
