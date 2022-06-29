@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory;
 use App\Models\RealEstate;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -15,97 +16,70 @@ class RealEstateSeeder extends Seeder
      */
     public function run()
     {
-        // create real estates
-        // 1 to 10
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'Milan',
-            'type' => 'House',
-            'sales_type' => 'Rent',
-            'price' => 10000000,
-            'image' => 'https://architecturebeast.com/wp-content/uploads/2018/04/Simple-modern-house-with-an-amazing-floating-stairs-Architecture-Beast-33-main-min-2-min.jpg',
-            'status' => 'Available',
-        ]);
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'Paris',
-            'type' => 'House',
-            'sales_type' => 'Rent',
-            'price' => 11000000,
-            'image' => 'https://architecturebeast.com/wp-content/uploads/2018/04/Simple-modern-house-with-an-amazing-floating-stairs-Architecture-Beast-28-min.jpg',
-            'status' => 'Available',
-        ]);
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'London',
-            'type' => 'House',
-            'sales_type' => 'Rent',
-            'price' => 12000000,
-            'image' => 'https://i.pinimg.com/originals/ad/3c/aa/ad3caa4acea87354ed9d8432af7cbc11.jpg',
-            'status' => 'Available',
-        ]);
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'Monaco',
-            'type' => 'House',
-            'sales_type' => 'Rent',
-            'price' => 13000000,
-            'image' => 'https://archello.s3.eu-central-1.amazonaws.com/images/2018/05/11/tobiarchitects1.1526035990.6946.jpg',
-            'status' => 'Available',
-        ]);
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'Doha',
-            'type' => 'House',
-            'sales_type' => 'Rent',
-            'price' => 14000000,
-            'image' => 'https://www.mydomaine.com/thmb/LhwJEsBuRKPcFOhlKbig422LrK4=/2048x1536/filters:fill(auto,1)/SuCasaDesign-Modern-9335be77ca0446c7883c5cf8d974e47c.jpg',
-            'status' => 'Available',
-        ]);
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'Abu Dhabi',
-            'type' => 'House',
-            'sales_type' => 'Buy',
-            'price' => 15000000,
-            'image' => 'https://cdn.houseplansservices.com/product/6ek8jns2uvt3p24kbigoctc4ih/w800x533.jpg?v=13',
-            'status' => 'Available',
-        ]);
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'Phoenix',
-            'type' => 'House',
-            'sales_type' => 'Buy',
-            'price' => 16000000,
-            'image' => 'https://cdn1.epicgames.com/ue/product/Screenshot/ForestHouse0-1920x1080-c854bb9b293be858a30a60776f486f6c.jpg?resize=1&w=1920',
-            'status' => 'Available',
-        ]);
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'Los Angeles',
-            'type' => 'House',
-            'sales_type' => 'Buy',
-            'price' => 17000000,
-            'image' => 'https://image.digitalinsightresearch.in/uploads/imagelibrary/Archive/Main/01_Casa%20Cruzada.jpg',
-            'status' => 'Available',
-        ]);
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'Las Vegas',
-            'type' => 'House',
-            'sales_type' => 'Buy',
-            'price' => 18000000,
-            'image' => 'http://cdn.home-designing.com/wp-content/uploads/2017/05/wood-white-and-charcoal-modern-exterior-paint-themes.jpg',
-            'status' => 'Available',
-        ]);
-        RealEstate::create([
-            'id' => Str::uuid(),
-            'location' => 'Dallas',
-            'type' => 'House',
-            'sales_type' => 'Buy',
-            'price' => 19000000,
-            'image' => 'https://images.adsttc.com/media/images/6233/1933/24a2/8301/69ea/797b/newsletter/2fd74fa5-4d7b-4172-97a6-abd4ab2171f1.jpg?1647516014',
-            'status' => 'Available',
-        ]);
+        $faker = Factory::create();
+
+        for ($i = 1; $i <= 25; $i++) {
+            RealEstate::create([
+                'id' => Str::uuid(),
+                'location' => 'Milan',
+                'type' => 'House',
+                'sales_type' => $faker->realTextBetween(),
+                'price' => $faker->numberBetween(1000, 10000),
+                'image' => 'real_estate' . $i . '.jpg',
+                'status' => 'Available',
+            ]);
+
+            if ($i % 2 == 0) {
+                // bikin house
+                if ($i % 4 == 0) {
+                    // house rent
+                    RealEstate::create([
+                        'id' => Str::uuid(),
+                        'location' => $faker->streetAddress(),
+                        'type' => 'House',
+                        'sales_type' => 'Rent',
+                        'price' => $faker->numberBetween(5000, 10000),
+                        'image' => 'real_estate' . $i . '.jpg',
+                        'status' => 'Available',
+                    ]);
+                } else {
+                    // house buy
+                    RealEstate::create([
+                        'id' => Str::uuid(),
+                        'location' => $faker->streetAddress(),
+                        'type' => 'House',
+                        'sales_type' => 'Buy',
+                        'price' => $faker->numberBetween(250000, 600000),
+                        'image' => 'real_estate' . $i . '.jpg',
+                        'status' => 'Available',
+                    ]);
+                }
+            } else {
+                // bikin apartment
+                if ($i % 3 == 0) {
+                    // apartment jual
+                    RealEstate::create([
+                        'id' => Str::uuid(),
+                        'location' => $faker->streetAddress(),
+                        'type' => 'Apartment',
+                        'sales_type' => 'Buy',
+                        'price' => $faker->numberBetween(250000, 600000),
+                        'image' => 'real_estate' . $i . '.jpg',
+                        'status' => 'Available',
+                    ]);
+                } else {
+                    // apartment rent
+                    RealEstate::create([
+                        'id' => Str::uuid(),
+                        'location' => $faker->streetAddress(),
+                        'type' => 'Apartment',
+                        'sales_type' => 'Rent',
+                        'price' => $faker->numberBetween(5000, 10000),
+                        'image' => 'real_estate' . $i . '.jpg',
+                        'status' => 'Available',
+                    ]);
+                }
+            }
+        }
     }
 }
