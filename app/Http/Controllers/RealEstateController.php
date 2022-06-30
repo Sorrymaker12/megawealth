@@ -48,7 +48,7 @@ class RealEstateController extends Controller
         $Cart = User::find(Auth::user()->id)->cart;
         $RealEstate = RealEstate::find($Request->real_estate_id);
 
-        $RealEstate->status = 'sold';
+        $RealEstate->status = 'Sold';
         $RealEstate->save();
 
         $CartItem = new CartItem();
@@ -67,8 +67,16 @@ class RealEstateController extends Controller
         ]);
     }
 
-    public function cart_delete()
+    public function cart_delete(Request $Request)
     {
+        $RealEstate = RealEstate::find($Request->real_estate_id);
+        $RealEstate->status = 'Available';
+        $RealEstate->save();
+
+        $CartItem = CartItem::find($Request->cart_item_id);
+        $CartItem->delete();
+
+        return redirect()->route('cart_page');
     }
 
     public function cart_checkout()
