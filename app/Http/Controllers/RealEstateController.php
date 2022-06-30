@@ -24,7 +24,7 @@ class RealEstateController extends Controller
         $Cart = User::find(Auth::user()->id)->cart;
         $RealEstate = RealEstate::find($Request->real_estate_id);
 
-        $RealEstate->status = 'sold';
+        $RealEstate->status = 'Cart';
         $RealEstate->save();
 
         $CartItem = new CartItem();
@@ -48,7 +48,7 @@ class RealEstateController extends Controller
         $Cart = User::find(Auth::user()->id)->cart;
         $RealEstate = RealEstate::find($Request->real_estate_id);
 
-        $RealEstate->status = 'Sold';
+        $RealEstate->status = 'Cart';
         $RealEstate->save();
 
         $CartItem = new CartItem();
@@ -79,8 +79,21 @@ class RealEstateController extends Controller
         return redirect()->route('cart_page');
     }
 
-    public function cart_checkout()
+    public function cart_checkout(Request $Request)
     {
+        // checkout
+        $Cart = User::find(Auth::user()->id)->cart;
+        $CartItems = CartItem::where('cart_id', '=', $Cart->id)->get();
+
+        foreach ($CartItems as $CartItem) {
+            $RealEstate = RealEstate::find($CartItem->real_estate_id);
+            $RealEstate->status = 'Sold';
+            $RealEstate->save();
+
+            $CartItem->delete();
+        }
+
+        return redirect()->route('home_page');
     }
 
     public function index_result()

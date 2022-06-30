@@ -38,7 +38,7 @@
                     </div>
                 @endforeach
             @else
-                <p class="mx-5 fs-4 fw-semibold">No Available Real Estate Found</p>
+                <p class="mx-5 fs-4 fw-semibold">No Data in Cart Yet</p>
             @endif
         </div>
         <div class="my-2"></div>
