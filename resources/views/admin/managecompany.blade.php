@@ -18,8 +18,8 @@
                 @foreach ($Offices as $Office)
                     {{-- Office Card --}}
                     <div class="card mx-4" style="width: 24rem; height: 32rem;">
-                        <img src="{{ $Office->image }}" class="card-img-top" alt="..."
-                            style="height: 20rem; width: 24rem;">
+                        <img src="{{ asset('Storage/Office/' . $Office->image) }}" class="card-img-top" alt="..."
+                            style="height: 20rem; width: 100%;">
                         <div class="card-body">
                             <h5 class="card-title">{{ $Office->office_name }}</h5>
                             <p class="card-text">{{ $Office->address }}</p>

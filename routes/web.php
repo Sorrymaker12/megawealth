@@ -33,8 +33,12 @@ Route::group(['prefix' => 'view'], function () {
     Route::get('home', [UserController::class, 'index_home'])->name('home_page');
     Route::get('about', [OfficeController::class, 'index_about'])->name('about_page');
     Route::get('buy', [RealEstateController::class, 'index_buy'])->name('buy_page');
+    Route::post('buy', [RealEstateController::class, 'buy'])->name('buy')->middleware('user');
     Route::get('rent', [RealEstateController::class, 'index_rent'])->name('rent_page');
+    Route::post('rent', [RealEstateController::class, 'rent'])->name('rent')->middleware('user');
     Route::get('cart', [RealEstateController::class, 'index_cart'])->name('cart_page')->middleware('user');
+    Route::post('cart_checkout', [RealEstateController::class, 'cart_checkout'])->name('cart_checkout')->middleware('user');
+    Route::post('cart_delete', [RealEstateController::class, 'cart_delete'])->name('cart_delete')->middleware('user');
     Route::get('result', [RealEstateController::class, 'index_result'])->name('result_page');
 });
 

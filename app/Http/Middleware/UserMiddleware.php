@@ -19,10 +19,10 @@ class UserMiddleware
     {
         if (Auth::check()) {
             if (Auth::user()->role != 'member') {
-                return abort(403);
+                return redirect()->route('login_page');
             }
         } else {
-            return abort(403);
+            return redirect()->route('login_page');
         }
         return $next($request);
     }

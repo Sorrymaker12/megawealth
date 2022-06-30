@@ -18,17 +18,7 @@ class RealEstateSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for ($i = 1; $i <= 25; $i++) {
-            RealEstate::create([
-                'id' => Str::uuid(),
-                'location' => 'Milan',
-                'type' => 'House',
-                'sales_type' => $faker->realTextBetween(),
-                'price' => $faker->numberBetween(1000, 10000),
-                'image' => 'real_estate' . $i . '.jpg',
-                'status' => 'Available',
-            ]);
-
+        for ($i = 1; $i <= 15; $i++) {
             if ($i % 2 == 0) {
                 // bikin house
                 if ($i % 4 == 0) {

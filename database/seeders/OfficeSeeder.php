@@ -18,10 +18,10 @@ class OfficeSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for ($i = 1; $i <= 25; $i++) {
+        for ($i = 1; $i <= 15; $i++) {
             Office::create([
                 'id' => Str::uuid(),
-                'office_name' => 'Office ' . $faker->streetAddress(),
+                'office_name' => $faker->city() . ' Office',
                 'image' => 'office' . $i . '.jpg',
                 'address' => $faker->streetAddress(),
                 'contact_name' => $faker->firstName() . ' ' . $faker->lastName(),

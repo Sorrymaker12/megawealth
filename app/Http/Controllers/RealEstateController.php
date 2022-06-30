@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\User;
+use App\Models\CartItem;
 use App\Models\RealEstate;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RealEstateController extends Controller
 {
@@ -14,6 +19,23 @@ class RealEstateController extends Controller
         ]);
     }
 
+    public function buy(Request $Request)
+    {
+        $Cart = User::find(Auth::user()->id)->cart;
+        $RealEstate = RealEstate::find($Request->real_estate_id);
+
+        $RealEstate->status = 'sold';
+        $RealEstate->save();
+
+        $CartItem = new CartItem();
+        $CartItem->id = Str::uuid();
+        $CartItem->cart_id = $Cart->id;
+        $CartItem->real_estate_id = $RealEstate->id;
+        $CartItem->save();
+
+        return redirect()->route('buy_page');
+    }
+
     public function index_rent()
     {
         return view('view.rent', [
@@ -21,9 +43,36 @@ class RealEstateController extends Controller
         ]);
     }
 
+    public function rent(Request $Request)
+    {
+        $Cart = User::find(Auth::user()->id)->cart;
+        $RealEstate = RealEstate::find($Request->real_estate_id);
+
+        $RealEstate->status = 'sold';
+        $RealEstate->save();
+
+        $CartItem = new CartItem();
+        $CartItem->id = Str::uuid();
+        $CartItem->cart_id = $Cart->id;
+        $CartItem->real_estate_id = $RealEstate->id;
+        $CartItem->save();
+
+        return redirect()->route('rent_page');
+    }
+
     public function index_cart()
     {
-        return view('view.cart');
+        return view('view.cart', [
+            'CartItems' => CartItem::where('cart_id', Auth::user()->cart->id)->paginate(4)
+        ]);
+    }
+
+    public function cart_delete()
+    {
+    }
+
+    public function cart_checkout()
+    {
     }
 
     public function index_result()

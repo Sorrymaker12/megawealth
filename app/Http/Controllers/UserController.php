@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\RealEstate;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -31,12 +32,18 @@ class UserController extends Controller
         ]);
 
         $user = new User();
-        $user->id = Str::uuid();
+        $wa = Str::uuid();
+        $user->id = $wa;
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->role = "member";
         $user->save();
+
+        $cart = new Cart();
+        $cart->id = Str::uuid();
+        $cart->user_id = $wa;
+        $cart->save();
 
         return redirect()->route('login_page');
     }

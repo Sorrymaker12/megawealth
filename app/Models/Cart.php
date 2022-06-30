@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model
 {
     use HasFactory;
+
+    public $incrementing = false;
+
+    protected $keyType = 'uuid';
+
 
     protected $guarded = ['id'];
 
@@ -16,8 +22,8 @@ class Cart extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function realEstates()
+    public function cartItem()
     {
-        return $this->hasMany(RealEstate::class);
+        return $this->hasMany(cartItem::class);
     }
 }
