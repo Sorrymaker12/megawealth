@@ -33,7 +33,7 @@ class RealEstateController extends Controller
         $CartItem->real_estate_id = $RealEstate->id;
         $CartItem->save();
 
-        return redirect()->route('buy_page');
+        return redirect()->route('buy_page')->with('message', 'Item Added to Cart');
     }
 
     public function index_rent()
@@ -57,7 +57,7 @@ class RealEstateController extends Controller
         $CartItem->real_estate_id = $RealEstate->id;
         $CartItem->save();
 
-        return redirect()->route('rent_page');
+        return redirect()->route('rent_page')->with('message', 'Item Added to Cart');
     }
 
     public function index_cart()
@@ -76,7 +76,7 @@ class RealEstateController extends Controller
         $CartItem = CartItem::find($Request->cart_item_id);
         $CartItem->delete();
 
-        return redirect()->route('cart_page');
+        return redirect()->route('cart_page')->with('message', 'Item Removed');
     }
 
     public function cart_checkout(Request $Request)
@@ -93,12 +93,34 @@ class RealEstateController extends Controller
             $CartItem->delete();
         }
 
-        return redirect()->route('home_page');
+        return redirect()->route('home_page')->with('message', 'Checkout Successful');
     }
 
-    public function index_result()
+    public function search(Request $Request)
     {
-        return view('view.result');
+        $Request->validate(
+            [
+                'search' => 'required|string|max:255',
+            ]
+        );
+
+        return redirect('view/result/' . $Request->search);
+    }
+
+    public function index_result(String $Key)
+    {
+        // find real estate with location that contains $Key
+        $RealEstates = RealEstate::where('status', '=', 'Available')
+            ->where(function ($query) use ($Key) {
+                $query->where('location', 'like', '%' . $Key . '%')
+                    ->orWhere('sales_type', 'like', '%' . $Key . '%')
+                    ->orWhere('type', 'like', '%' . $Key . '%');;
+            })->paginate(4);
+
+        return view('view.result', [
+            'RealEstates' => $RealEstates,
+            'Key' => $Key
+        ]);
     }
 
     public function index_managerealestate()

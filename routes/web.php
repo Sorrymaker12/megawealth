@@ -39,7 +39,8 @@ Route::group(['prefix' => 'view'], function () {
     Route::get('cart', [RealEstateController::class, 'index_cart'])->name('cart_page')->middleware('user');
     Route::post('cart_checkout', [RealEstateController::class, 'cart_checkout'])->name('cart_checkout')->middleware('user');
     Route::post('cart_delete', [RealEstateController::class, 'cart_delete'])->name('cart_delete')->middleware('user');
-    Route::get('result', [RealEstateController::class, 'index_result'])->name('result_page');
+    Route::post('search', [RealEstateController::class, 'search'])->name('search');
+    Route::get('/result/{key}', [RealEstateController::class, 'index_result'])->name('result');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {

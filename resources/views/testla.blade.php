@@ -1,2 +1,0 @@
-@dump($Re)
-@dump($Ru)

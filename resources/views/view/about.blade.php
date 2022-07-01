@@ -16,13 +16,13 @@
     </div>
     <div class="office-container mt-5" style="margin-left: 15rem">
         <h2>Our Offices</h2>
-
         <div class="office-container mt-5 mb-3">
             <div class="office-container row" style="width: 90rem">
                 @foreach ($offices as $ofc)
-                    <div class="card" style="width: 15rem; margin-left:auto; margin-right:auto">
-                        <img src="{{ asset('Storage/Office/' . $ofc->image) }}" class="card-img"
-                            style="height: 10rem; width:100%">
+                    <div class="card shadow bg-body rounded px-0 py-0"
+                        style="width: 16rem; margin-left:auto; margin-right:auto; border: none;">
+                        <img src="{{ asset('Storage/Office/' . $ofc->image) }}" class="card-img rounded-3 px-1 py-1"
+                            style="height: 10rem; width:100%;">
                         <div class="card-body">
                             <h5 class="card-title">{{ $ofc->office_name }}</h5>
                             <p class="card-text">{{ $ofc->address }}</p>
@@ -34,6 +34,7 @@
             </div>
         </div>
     </div>
+    <div class="p-4"></div>
     <div class="pagination d-flex justify-content-center">
         {{ $offices->links() }}
     </div>
