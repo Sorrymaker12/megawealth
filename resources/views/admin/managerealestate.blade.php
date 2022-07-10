@@ -17,7 +17,7 @@
             <div class="d-flex justify-content-center">
                 @foreach ($RealEstates as $RealEstate)
                     {{-- Real Estate Card --}}
-                    <div class="card mx-4" style="width: 24rem; height: 32rem;">
+                    <div class="card mx-4 shadow bg-body rounded" style="width: 24rem; height: 32rem; border: none;">
                         <img src="{{ asset('Storage/RealEstate/' . $RealEstate->image) }}" class="card-img-top"
                             alt="..." style="height: 20rem; width: 100%;">
                         <div class="card-body">
@@ -40,7 +40,8 @@
                                 @endif
                             </div>
                             <div class="d-flex justify-content-center">
-                                <a href="/admin/updaterealestate/{{ $RealEstate->id }}" class="btn btn-primary mx-4">Update</a>
+                                <a href="/admin/updaterealestate/{{ $RealEstate->id }}"
+                                    class="btn btn-primary mx-4">Update</a>
 
                                 <form action="/admin/deleterealestate/{{ $RealEstate->id }}" method="POST">
                                     {{ method_field('DELETE') }}
