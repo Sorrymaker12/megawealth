@@ -40,8 +40,14 @@
                                 @endif
                             </div>
                             <div class="d-flex justify-content-center">
-                                <a href="/admin/updaterealestate" class="btn btn-primary mx-4">Update</a>
-                                <a href="#" class="btn btn-danger mx-4">Delete</a>
+                                <a href="/admin/updaterealestate/{{ $RealEstate->id }}" class="btn btn-primary mx-4">Update</a>
+
+                                <form action="/admin/deleterealestate/{{ $RealEstate->id }}" method="POST">
+                                    {{ method_field('DELETE') }}
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger mx-4">Delete</button>
+                                </form>
+
                                 @if ($RealEstate->status === 'Cart')
                                     <a href="#" class="btn btn-success mx-4">Finish</a>
                                 @endif

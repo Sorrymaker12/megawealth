@@ -9,6 +9,7 @@ use App\Models\RealEstate;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RealEstateController extends Controller
 {
@@ -135,8 +136,72 @@ class RealEstateController extends Controller
         return view('admin.addrealestate');
     }
 
-    public function index_updaterealestate()
+    public function index_updaterealestate(Request $request)
     {
-        return view('admin.updaterealestate');
+        $id = $request->id;
+        $realestate = RealEstate::find($id);
+        return view('admin.updaterealestate', compact('realestate'));
+    }
+
+    public function createRealEstate(Request $request){
+        //return $request;
+        $request->validate([
+            'SalesType' => 'required',
+            'BuildingType' => 'required',
+            'Price' => 'required',
+            'Location' => 'required',
+            'Image' => 'required|mimes:jpeg,jpg,png|max:10000'
+        ]);
+
+        $name = $request->input('Location');
+
+        $imageName = 'realestate'.$name.'.'.$request->Image->extension();
+        Storage::putFileAs('public/RealEstate', $request->file('Image'), $imageName);
+
+        $realestate = new RealEstate();
+        $realestate->id = Str::uuid();
+        $realestate->sales_type = $request->input('SalesType');
+        $realestate->type = $request->input('BuildingType');
+        $realestate->price = $request->input('Price');
+        $realestate->location = $request->input('Location');
+        $realestate->image = $imageName;
+        $realestate->status = 'Available';
+        $realestate->save();
+
+        return redirect()->route('managerealestate_page');
+    }
+
+    public function updateRealEstate(Request $request){
+        $request->validate([
+            'SalesType' => 'required',
+            'BuildingType' => 'required',
+            'Price' => 'required',
+            'Location' => 'required',
+        ]);
+
+        $id = $request->id;
+        $realestate = RealEstate::find($id);
+
+        $realestate->sales_type = $request->input('SalesType');
+        $realestate->type = $request->input('BuildingType');
+        $realestate->price = $request->input('Price');
+        $realestate->location = $request->input('Location');
+        $realestate->save();
+
+        return redirect()->route('managerealestate_page');
+    }
+
+    public function deleteRealEstate(Request $request)
+    {
+        $realestate = RealEstate::find($request->id);
+
+        if(isset($realestate)){
+            Storage::delete('public/RealEstate/'.$realestate->image);
+            $realestate->delete();
+        }
+
+        RealEstate::query()->where('id','=',$request->id)->delete();
+
+        return redirect()->route('managerealestate_page');
     }
 }

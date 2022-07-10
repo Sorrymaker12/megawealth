@@ -12,6 +12,7 @@
             </svg>
             Add Office
         </a>
+
         <div class="my-4"></div>
         <div class="d-flex flex-column mb-3">
             <div class="d-flex justify-content-center">
@@ -25,8 +26,14 @@
                             <p class="card-text">{{ $Office->address }}</p>
                             <p class="card-text">{{ $Office->contact_name }} - +{{ $Office->phone_number }}</p>
                             <div class="d-flex justify-content-center">
-                                <a href="/admin/updateoffice" class="btn btn-primary mx-4">Update</a>
-                                <a href="#" class="btn btn-danger mx-4">Delete</a>
+                                <a href="/admin/updateoffice/{{ $Office->id }}" class="btn btn-primary mx-4">Update</a>
+                                {{-- <a href="/admin/deleteoffice/{{ $Office->id }}" class="btn btn-danger mx-4">Delete</a> --}}
+                                <form action="/admin/deleteoffice/{{ $Office->id }}" method="POST">
+                                    {{ method_field('DELETE') }}
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger mx-4">Delete</button>
+                                </form>
+
                             </div>
                         </div>
                     </div>

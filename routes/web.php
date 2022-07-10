@@ -46,8 +46,14 @@ Route::group(['prefix' => 'view'], function () {
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('managecompany', [OfficeController::class, 'index_managecompany'])->name('managecompany_page');
     Route::get('addoffice', [OfficeController::class, 'index_addoffice'])->name('addoffice_page');
-    Route::get('updateoffice', [OfficeController::class, 'index_updateoffice'])->name('updateoffice_page');
+    Route::post('addoffice', [OfficeController::class, 'createOffice'])->name('addOffice');
+    Route::get('updateoffice/{id}', [OfficeController::class, 'index_updateoffice'])->name('updateoffice_page');
+    Route::put('updateoffice/{id}', [OfficeController::class, 'updateOffice'])->name('updateOffice');
+    Route::delete('deleteoffice/{id}', [OfficeController::class, 'deleteOffice'])->name('deleteOffice');
     Route::get('managerealestate', [RealEstateController::class, 'index_managerealestate'])->name('managerealestate_page');
     Route::get('addrealestate', [RealEstateController::class, 'index_addrealestate'])->name('addrealestate_page');
-    Route::get('updaterealstate', [RealEstateController::class, 'index_updaterealestate'])->name('updaterealestate_page');
+    Route::post('addrealestate', [RealEstateController::class, 'createRealEstate'])->name('addRealEstate');
+    Route::get('updaterealestate/{id}', [RealEstateController::class, 'index_updaterealestate'])->name('updaterealestate_page');
+    Route::put('updaterealestate/{id}', [RealEstateController::class, 'updateRealEstate'])->name('updateRealEstate');
+    Route::delete('deleterealestate/{id}', [RealEstateController::class, 'deleteRealEstate'])->name('deleteRealEstate');
 });
