@@ -95,7 +95,7 @@ class RealEstateController extends Controller
             $transaction = new Transaction();
             $transaction->transaction_id = Str::uuid();
             $transaction->transaction_date = $Cart->created_at;
-            $transaction->id = Auth::user()->id;
+            $transaction->user_id = Auth::user()->id;
             $transaction->type_of_sales = $RealEstate->sales_type;
             $transaction->building_type = $RealEstate->type;
             $transaction->price = $RealEstate->price;

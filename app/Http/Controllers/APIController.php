@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\CartItem;
 use App\Models\RealEstate;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -67,12 +68,17 @@ class APIController extends Controller
         //     ->where('email', '=', $request->email)
         //     ->first();
 
-        $data =  User::where('email', $request->email)->first();
+        // $data =  User::where('email', $request->email)->first();
+
+        $data = Transaction::join('users', 'users.id' , '=', 'transactions.user_id')
+            ->select('transaction_date', 'transaction_id', 'users.id AS id', 'type_of_sales', 'building_type', 'price', 'location', 'image_path')
+            ->where('email', '=', $request->email)
+            ->get();
 
         if (isset($data)) {
             return response()->json([
                 'Status' => 'Data Found',
-                'Data' => $data->transaction
+                'Data' => $data
             ]);
         } else {
             return response()->json([

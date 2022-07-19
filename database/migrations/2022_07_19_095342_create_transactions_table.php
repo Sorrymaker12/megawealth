@@ -16,14 +16,15 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('transaction_id')->primary();
             $table->timestamp('transaction_date');
-            $table->uuid('id');
+            $table->uuid('user_id');
             $table->string('type_of_sales');
             $table->string('building_type');
             $table->integer('price');
             $table->string('location');
             $table->string('image_path');
+            $table->timestamps();
 
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
