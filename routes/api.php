@@ -19,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [APIController::class, 'login']);
 // register
 Route::post('register', [APIController::class, 'register']);
+// transaction
+Route::post('get_data', [APIController::class, 'get_data'])->middleware('auth:api');

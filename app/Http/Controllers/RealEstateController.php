@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\CartItem;
 use App\Models\RealEstate;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,6 +91,17 @@ class RealEstateController extends Controller
             $RealEstate = RealEstate::find($CartItem->real_estate_id);
             $RealEstate->status = 'Sold';
             $RealEstate->save();
+
+            $transaction = new Transaction();
+            $transaction->transaction_id = Str::uuid();
+            $transaction->transaction_date = $Cart->created_at;
+            $transaction->id = Auth::user()->id;
+            $transaction->type_of_sales = $RealEstate->sales_type;
+            $transaction->building_type = $RealEstate->type;
+            $transaction->price = $RealEstate->price;
+            $transaction->location = $RealEstate->location;
+            $transaction->image_path = $RealEstate->image;
+            $transaction->save();
 
             $CartItem->delete();
         }

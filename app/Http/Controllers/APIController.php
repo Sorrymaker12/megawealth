@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
+use App\Models\CartItem;
+use App\Models\RealEstate;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -22,7 +25,7 @@ class APIController extends Controller
             ]);
         } else {
             return response()->json([
-                'Message' => 'Login Successful',
+                'Status' => 'Login Successful',
                 'Token' => $request->user()->createToken('BearerToken')->accessToken,
             ]);
         }
@@ -47,4 +50,32 @@ class APIController extends Controller
             'Status' => 'Register Success'
         ]);
     }
+    // get data
+    public function get_data(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email',
+        ]);
+
+        // $data = User::query()
+        //     ->select('*')
+        //     ->where('email', '=', $request->email)
+        //     ->first();
+
+        $data =  User::where('email', $request->email)->first();
+
+        if(isset($data)){
+            return response()->json([
+                'Status' => 'Data Found',
+                'Data' => $data->transaction
+            ]);
+        }
+        else{
+            return response()->json([
+                'Status' => 'Data Not Found',
+            ]);
+        }
+
+    }
+
 }

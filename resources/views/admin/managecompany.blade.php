@@ -31,7 +31,7 @@
                                 <form action="/admin/deleteoffice/{{ $Office->id }}" method="POST">
                                     {{ method_field('DELETE') }}
                                     @csrf
-                                    <button type="submit" class="btn btn-danger mx-4">Delete</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
 
                             </div>
