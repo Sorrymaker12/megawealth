@@ -46,6 +46,11 @@ class APIController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
 
+        $cart = new Cart();
+        $cart->id = Str::uuid();
+        $cart->user_id = $user->id;
+        $cart->save();
+
         return response()->json([
             'Status' => 'Register Success'
         ]);
@@ -64,18 +69,15 @@ class APIController extends Controller
 
         $data =  User::where('email', $request->email)->first();
 
-        if(isset($data)){
+        if (isset($data)) {
             return response()->json([
                 'Status' => 'Data Found',
                 'Data' => $data->transaction
             ]);
-        }
-        else{
+        } else {
             return response()->json([
                 'Status' => 'Data Not Found',
             ]);
         }
-
     }
-
 }
