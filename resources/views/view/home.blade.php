@@ -41,7 +41,7 @@
                 <p class="card-text">Find the perfect real estate to buy. Click the button below to view available real
                     estate to buy.</p>
                 <div class="d-flex justify-content-center">
-                    <a href="/view/buy" class="btn btn-primary">Buy</a>
+                    <a href="@if (!Gate::allows('isAdmin')) /view/buy @endif" class="btn btn-primary">Buy</a>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                 <p class="card-text">Find the perfect real estate to rent. Click the button below to view rented real
                     estate.</p>
                 <div class="d-flex justify-content-center">
-                    <a href="/view/rent" class="btn btn-primary">Rent</a>
+                    <a href="@if (!Gate::allows('isAdmin')) /view/rent @endif" class="btn btn-primary">Rent</a>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                 <p class="card-text">Learn more about megawealth, our company and everything about us. Click the button
                     below to view.</p>
                 <div class="d-flex justify-content-center">
-                    <a href="/view/about" class="btn btn-primary">About Us</a>
+                    <a href="@if (!Gate::allows('isAdmin')) /view/about @endif" class="btn btn-primary">About Us</a>
                 </div>
             </div>
         </div>
