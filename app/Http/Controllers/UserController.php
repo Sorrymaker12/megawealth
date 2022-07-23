@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class UserController extends Controller
 {
@@ -56,7 +57,7 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            // Cookie::queue('LoginCookie', $request->input('email'), 5);
+            Cookie::queue('LoginCookie', $request->input('email'), 5);
 
             //5 itu 5 menit cookie akan berlaku
 
