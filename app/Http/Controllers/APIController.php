@@ -75,14 +75,20 @@ class APIController extends Controller
             ->where('email', '=', $request->email)
             ->get();
 
-        if (isset($data)) {
+        $user_id = User::where('email', $request->email)
+            ->select('id')
+            ->first();
+
+        if (count($data) !== 0) {
             return response()->json([
                 'Status' => 'Data Found',
                 'Data' => $data
             ]);
         } else {
             return response()->json([
-                'Status' => 'Data Not Found',
+                'Status' => 'Data is Empty',
+                'Data' => $data,
+                'user_id' => $user_id
             ]);
         }
     }
